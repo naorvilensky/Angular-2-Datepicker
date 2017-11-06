@@ -535,7 +535,13 @@ export class DatepickerComponent implements OnInit, OnChanges {
       }
     }
     // check if new date would be within range
-    let newDate = new Date(newYear, newMonth);
+		let newDate;
+		if(this.rangeStart) {
+			newDate = new Date(newYear, newMonth, this.rangeStart.getDate());
+		}
+		else {
+			newDate = new Date(newYear, newMonth);
+		}
     let newDateValid: boolean;
     if (direction === 'left') {
       newDateValid = !this.rangeStart || newDate.getTime() >= this.rangeStart.getTime();
